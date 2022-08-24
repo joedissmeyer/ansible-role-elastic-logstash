@@ -42,13 +42,13 @@
 
 - name: "Update Xmx JVM memory setting in jvm.options"
   replace:
-    path: /etc/logstash/log4j2.options
+    path: /etc/logstash/jvm.options
     regexp: '^-Xmx'
     replace: '-Xmx{{ logstash_jvm_memory }}'
 
 - name: "Update Xms JVM memory setting in jvm.options"
   replace:
-    path: /etc/logstash/log4j2.options
+    path: /etc/logstash/jvm.options
     regexp: '^-Xms'
     replace: '-Xms{{ logstash_jvm_memory }}'
   notify: restart logstash

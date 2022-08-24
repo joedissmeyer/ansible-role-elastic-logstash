@@ -1,9 +1,9 @@
 ---
-- include: setup.yml
-- include: config.yml
-- include: ssl.yml
-- include: log_cleanup.yml
-- include: firewall.yml
+- include_tasks: setup.yml
+- include_tasks: config.yml
+- include_tasks: ssl.yml
+- include_tasks: log_cleanup.yml
+- include_tasks: firewall.yml
 
 - name: Force systemd to reread configs
   systemd:
