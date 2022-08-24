@@ -1,0 +1,15 @@
+config.reload.automatic: true
+
+pipeline:
+  batch:
+    delay: 100
+    size: 1000
+
+http.host: "0.0.0.0"
+http.port: 9600-9700
+path.logs: {{ logstash_logs_dir }}
+path.data: {{ logstash_data_dir }}
+log.level: info
+log.format: json
+
+path.queue: {{ logstash_queue_dir }}

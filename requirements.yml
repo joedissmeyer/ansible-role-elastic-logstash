@@ -1,0 +1,4 @@
+---
+roles:
+- name: joedissmeyer.ansible_role_elastic_logstash
+  src: https://github.com/joedissmeyer/ansible-role-elastic-logstash.git

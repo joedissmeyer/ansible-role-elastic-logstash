@@ -1,0 +1,31 @@
+#############################################
+## Playbook to install and set up Logstash ##
+#############################################
+#
+# REQUIREMENTS:
+# - Install the required ansible roles. 
+#       $ ansible-galaxy install -r requirements.yml --force
+# - Sensitive credentials should be saved under an ansible vault protected yml in './vars'.
+# 
+# RUNNING THIS PLAYBOOK:
+#  
+#  $ ansible-playbook -i ../disslab/hosts --private-key ~/.ssh/ansible-user -u ansible-user playbook_example.yml
+#
+# NOTES:
+#
+#  - Tested against Fedora Server 36, RHEL/CentOS 7, RHEL/CentOS 8
+#
+
+- name: Install Logstash
+  become: yes
+  gather_facts: yes
+  hosts: logstash
+  roles:
+    - joedissmeyer.ansible_role_elastic_logstash
+  vars:
+    logstash_version: '7.17.5'
+    logstash_jvm_memory: 1g
+    es_security_enabled: true
+    es_logstash_user: logstash
+    es_logstash_password: MyLogstashPass1
+    logstash_rhel_download_source: 'https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-x86_64.rpm'

@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Joseph Dissmeyer
+  description: Ansible role for installing and configuring Logstash
+  company: joe@dissmeyer.com
+  license: Apache
+  min_ansible_version: '2.12'
+  platforms:
+  - name: EL
+    versions:
+    - all
+  galaxy_tags:
+    - "logstash"
+    - "elasticsearch"
+    - "logging"
+    - "middleware"

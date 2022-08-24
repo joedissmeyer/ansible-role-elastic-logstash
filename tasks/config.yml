@@ -1,0 +1,54 @@
+---
+- name: Create Logstash pipeline.yml file
+  template:
+    src: "pipelines.yml.j2"
+    dest: "/etc/logstash/pipelines.yml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Comment out logging config line in log4j.properties"
+  replace:
+    path: /etc/logstash/log4j2.properties
+    regexp: '^rootLogger.appenderRef.console.ref = \${sys:ls.log.format}_console'
+    replace: '#rootLogger.appenderRef.console.ref = \${sys:ls.log.format}_console'
+
+- name: Copy custom pattern file
+  copy:
+    src: "{{ item }}"
+    dest: '{{ logstash_config_dir }}/patterns'
+  with_items:
+    - custom_patterns
+
+- name: Create Logstash pipeline files
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/logstash/pipelines/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - pipeline-beats.conf
+
+- name: Create Logstash config file
+  template:
+    src: "templates/{{ item }}.j2"
+    dest: "/etc/logstash/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - logstash.yml
+
+- name: "Update Xmx JVM memory setting in jvm.options"
+  replace:
+    path: /etc/logstash/log4j2.options
+    regexp: '^-Xmx'
+    replace: '-Xmx{{ logstash_jvm_memory }}'
+
+- name: "Update Xms JVM memory setting in jvm.options"
+  replace:
+    path: /etc/logstash/log4j2.options
+    regexp: '^-Xms'
+    replace: '-Xms{{ logstash_jvm_memory }}'
+  notify: restart logstash

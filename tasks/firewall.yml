@@ -1,0 +1,9 @@
+---
+- name: Configure firewall ports for Logstash
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop:
+    - '{{ logstash_listen_port_beats }}/tcp'
