@@ -1,6 +1,4 @@
 ---
-# defaults file for ansible-role-elastic-logstash
----
 logstash_version: '7.17.5'
 
 logstash_listen_port_beats: 5044
