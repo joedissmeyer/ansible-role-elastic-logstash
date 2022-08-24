@@ -1,0 +1,22 @@
+---
+- name: Install Logstash rpm from URL
+  ansible.builtin.yum:
+    name: '{{ logstash_rhel_download_source }}'
+    state: present
+
+- name: Create the logstash pipelines directory
+  file:
+    path: /etc/logstash/pipelines
+    state: directory
+
+- name: Create the logstash custom patterns directory
+  file:
+    path: /etc/logstash/patterns
+    state: directory
+
+- name: Create the logstash persistent queue directory
+  file:
+    path: /opt/logstash
+    state: directory
+    owner: logstash
+    group: logstash

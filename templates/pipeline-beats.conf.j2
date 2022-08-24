@@ -1,0 +1,31 @@
+input {
+  beats {
+    id => "logstash-input-beats"
+    port => {{ logstash_listen_port_beats }}
+  }
+}
+
+filter {
+  mutate {
+    add_field => { "pipeline_id" => "beats" }
+  }
+}
+
+{% if es_security_enabled is true %}
+output {
+  elasticsearch {
+    hosts => [ "{{ es_http_protocol }}://{{ es_ingest_target }}:{{ es_port }}" ]
+    user => "{{ es_logstash_user }}"
+    password => "{{ es_logstash_pass }}"
+    index => "%{[pipeline_id]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+    ssl_certificate_verification => false
+  }
+}
+{% else %}
+output {
+  elasticsearch {
+    hosts => [ "{{ es_http_protocol }}://{{ es_ingest_target }}:{{ es_port }}" ]
+    index => "%{[pipeline_id]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+  }
+}
+{% endif %}

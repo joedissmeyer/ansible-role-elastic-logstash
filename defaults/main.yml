@@ -1,0 +1,29 @@
+---
+# defaults file for ansible-role-elastic-logstash
+---
+logstash_version: '7.17.5'
+
+logstash_listen_port_beats: 5044
+
+es_http_protocol: https
+es_ingest_target: localhost
+es_port: 9200
+es_security_enabled: true
+
+es_logstash_user: logstash
+es_logstash_pass: MyLogstashPass1
+
+logstash_jvm_memory: "1g"
+logstash_rhel_download_source: https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-x86_64.rpm
+logstash_deb_download_source:  https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-amd64.deb
+
+logstash_config_dir: /etc/logstash
+logstash_logs_dir: /var/log/logstash
+logstash_data_dir: /var/lib/logstash
+logstash_queue_dir: /opt/logstash/queue
+
+logstash_ssl_certificate_path: /etc/logstash
+logstash_ssl_certificate_file: "/etc/logstash/certificate.crt"
+logstash_ssl_key_file: "/etc/logstash/certificate.key"
+logstash_ssl_ca_cert: "/etc/logstash/ca.crt"
+logstash_enabled_on_boot: true

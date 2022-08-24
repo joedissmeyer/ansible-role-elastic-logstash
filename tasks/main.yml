@@ -1,0 +1,19 @@
+---
+# tasks file for ansible-role-elastic-logstash
+---
+- include: setup.yml
+- include: config.yml
+- include: ssl.yml
+- include: log_cleanup.yml
+- include: firewall.yml
+
+- name: Force systemd to reread configs
+  systemd:
+    daemon_reload: yes
+
+- name: Ensure Logstash is started and enabled on boot.
+  service:
+    name: logstash
+    state: restarted
+    enabled: "{{ logstash_enabled_on_boot }}"
+  notify: restart logstash

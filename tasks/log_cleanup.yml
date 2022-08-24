@@ -1,0 +1,10 @@
+---
+- name: Create Logstash Log File cleanup cron job - logstash-json.log
+  cron:
+    name: logstash_log_cleanup
+    job: "rm -rf /var/log/logstash/logstash-json-*"
+    user: root
+    state: present
+    cron_file: logstash_log_cleanup
+    minute: 00
+    hour: 03
