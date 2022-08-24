@@ -11,7 +11,7 @@ es_security_enabled: true
 es_logstash_user: logstash
 es_logstash_pass: MyLogstashPass1
 
-logstash_jvm_memory: "1g"
+logstash_jvm_memory: 1g
 logstash_rhel_download_source: https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-x86_64.rpm
 logstash_deb_download_source:  https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-amd64.deb
 

@@ -43,12 +43,12 @@
 - name: "Update Xmx JVM memory setting in jvm.options"
   replace:
     path: /etc/logstash/jvm.options
-    regexp: '^-Xmx'
+    regexp: '^\-Xmx[[:digit:]]g'
     replace: '-Xmx{{ logstash_jvm_memory }}'
 
 - name: "Update Xms JVM memory setting in jvm.options"
   replace:
     path: /etc/logstash/jvm.options
-    regexp: '^-Xms'
+    regexp: '^\-Xmxs[[:digit:]]g'
     replace: '-Xms{{ logstash_jvm_memory }}'
   notify: restart logstash
