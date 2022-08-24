@@ -1,6 +1,4 @@
 ---
-# tasks file for ansible-role-elastic-logstash
----
 - include: setup.yml
 - include: config.yml
 - include: ssl.yml
