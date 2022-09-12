@@ -24,8 +24,9 @@
     - joedissmeyer.ansible_role_elastic_logstash
   vars:
     logstash_version: '7.17.5'
-    logstash_jvm_memory: 1g
+    logstash_jvm_memory: 512mb
     es_security_enabled: true
     es_logstash_user: logstash
     es_logstash_password: MyLogstashPass1
     logstash_rhel_download_source: 'https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}-x86_64.rpm'
+    es_ingest_target: elasticsearch.mydomain.local
